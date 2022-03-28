@@ -1,0 +1,557 @@
+{
+	"openapi": "3.0.1",
+	"info": {
+		"title": "Binar Challenge 8",
+		"description": "Player API Documentation",
+		"termsOfService": "http://deriscode.com/terms/",
+		"contact": {
+			"name": "API Support",
+			"url": "http://www.deriscode.com/support",
+			"email": "support@deriscode.com"
+		},
+		"license": {
+			"name": "Apache 2.0",
+			"url": "https://www.apache.org/licenses/LICENSE-2.0.html"
+		},
+		"version": "1.0.1"
+	},
+	"servers": [
+		{
+			"url": "http://localhost:4000",
+			"description": "Development Server"
+		},
+		{
+			"url": "http://theapplication.com",
+			"description": "Production Server"
+		}
+	],
+	"tags": [
+		{
+			"name": "Player",
+			"description": "Endpoints of Player API"
+		}
+	],
+	"paths": {
+		"/api/v1/players": {
+			"post": {
+				"tags": ["Player"],
+				"summary": "Create a new player",
+				"operationId": "createPlayer",
+				"requestBody": {
+					"description": "Data submission to create new player",
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Create_Player_Body"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Create_Player_Body"
+							}
+						}
+					}
+				},
+				"responses": {
+					"201": {
+						"description": "Successfull operation to create a player",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "Success"
+										},
+										"data": {
+											"$ref": "#/components/schemas/Player"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Error operation",
+						"content": {
+							"application/json": {
+								"examples": {
+									"exampleOne": {
+										"summary": "username/email is empty",
+										"value": {
+											"result": "Failed",
+											"message": "username or email cannot empty"
+										}
+									},
+									"exampleTwo": {
+										"summary": "password is empty",
+										"value": {
+											"result": "Failed",
+											"message": "password cannot be empty"
+										}
+									},
+									"exampleThree": {
+										"summary": "password characters over the limit",
+										"value": {
+											"result": "Failed",
+											"message": "Password minimal 6 character"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"$ref": "#/components/responses/InternalServerError"
+					}
+				}
+			},
+			"get": {
+				"tags": ["Player"],
+				"summary": "Get all players",
+				"operationId": "getAllPlayers",
+				"parameters": [
+					{
+						"name": "username",
+						"in": "query",
+						"description": "Unique username of players",
+						"schema": {
+							"type": "string",
+							"example": "ironman"
+						}
+					},
+					{
+						"name": "email",
+						"in": "query",
+						"description": "Unique email of players",
+						"schema": {
+							"type": "string",
+							"example": "ironman@email.com"
+						}
+					},
+					{
+						"name": "experience",
+						"in": "query",
+						"description": "Experience of players",
+						"schema": {
+							"type": "integer",
+							"example": 5000
+						}
+					},
+					{
+						"name": "lvl",
+						"in": "query",
+						"description": "Level of players",
+						"schema": {
+							"type": "integer",
+							"example": 5
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Successfull operation to get all players",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "Success"
+										},
+										"data": {
+											"type": "array",
+											"items": {
+												"$ref": "#/components/schemas/Player"
+											}
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"$ref": "#/components/responses/InternalServerError"
+					}
+				}
+			}
+		},
+		"/api/v1/players/{id}": {
+			"parameters": [
+				{
+					"name": "id",
+					"in": "path",
+					"description": "Unique id of player",
+					"required": true,
+					"schema": {
+						"type": "integer",
+						"example": 2
+					}
+				}
+			],
+			"get": {
+				"tags": ["Player"],
+				"summary": "Get player by id",
+				"operationId": "getPlayerById",
+				"responses": {
+					"200": {
+						"description": "Successfull operation to get all players",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "Success"
+										},
+										"data": {
+											"$ref": "#/components/schemas/Player"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"$ref": "#/components/responses/404NotFound"
+					},
+					"500": {
+						"$ref": "#/components/responses/InternalServerError"
+					}
+				}
+			},
+			"put": {
+				"tags": ["Player"],
+				"summary": "Update an existing player information by id",
+				"operationId": "updatePlayerById",
+				"requestBody": {
+					"description": "Only updating username, email, and password",
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Update_Player_Body"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Update_Player_Body"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfull operation to update player",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "Success"
+										},
+										"message": {
+											"type": "string",
+											"example": "Player with id: 2 successfully updated"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"$ref": "#/components/responses/404NotFound"
+					},
+					"500": {
+						"description": "Error operation to update player",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "failed"
+										},
+										"message": {
+											"type": "string",
+											"example": "Failed to update"
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"tags": ["Player"],
+				"summary": "Delete player by id",
+				"operationId": "deletePlayerById",
+				"responses": {
+					"200": {
+						"description": "Successfull operation to delete player",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "Success"
+										},
+										"message": {
+											"type": "string",
+											"example": "Player with id: 100, was deleted successfully"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Error operation to delete player",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "FAILED"
+										},
+										"message": {
+											"type": "string",
+											"example": "Cannot delete Player with id=100. Maybe Player was not found!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"500": {
+						"$ref": "#/components/responses/InternalServerError"
+					}
+				}
+			}
+		},
+		"/api/v1/players/exp/{id}": {
+			"post": {
+				"tags": ["Player"],
+				"summary": "Update an existing player exp by id",
+				"operationId": "updateExpPlayerById",
+				"parameters": [
+					{
+						"name": "id",
+						"in": "path",
+						"description": "Unique id of player",
+						"required": true,
+						"schema": {
+							"type": "integer",
+							"example": 2
+						}
+					}
+				],
+				"requestBody": {
+					"description": "Experience must not be empty",
+					"content": {
+						"application/x-www-form-urlencoded": {
+							"schema": {
+								"$ref": "#/components/schemas/Update_Exp_Body"
+							}
+						},
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/Update_Exp_Body"
+							}
+						}
+					}
+				},
+				"responses": {
+					"200": {
+						"description": "Successfull operation to update player's exp",
+						"content": {
+							"application/json": {
+								"schema": {
+									"type": "object",
+									"properties": {
+										"result": {
+											"type": "string",
+											"example": "SUCCESS"
+										},
+										"message": {
+											"type": "string",
+											"example": "Player with id = 100 gain 2000 experience. Total experience = 0"
+										}
+									}
+								}
+							}
+						}
+					},
+					"400": {
+						"description": "Error operation",
+						"content": {
+							"application/json": {
+								"examples": {
+									"exampleOne": {
+										"summary": "exp field is empty",
+										"value": {
+											"result": "Failed",
+											"message": "Exp field cannot be empty"
+										}
+									},
+									"exampleTwo": {
+										"summary": "update operation failed",
+										"value": {
+											"result": "FAILED",
+											"message": "Cannot update Player with id=100!"
+										}
+									}
+								}
+							}
+						}
+					},
+					"404": {
+						"$ref": "#/components/responses/404NotFound"
+					},
+					"500": {
+						"$ref": "#/components/responses/InternalServerError"
+					}
+				}
+			}
+		}
+	},
+	"components": {
+		"responses": {
+			"404NotFound": {
+				"description": "Player data not found",
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/NotFound_Error"
+						}
+					}
+				}
+			},
+			"InternalServerError": {
+				"description": "Internal server error",
+				"content": {
+					"application/json": {
+						"schema": {
+							"$ref": "#/components/schemas/Server_Error"
+						}
+					}
+				}
+			}
+		},
+		"schemas": {
+			"Player": {
+				"required": ["username", "password"],
+				"type": "object",
+				"properties": {
+					"id": {
+						"type": "string"
+					},
+					"username": {
+						"type": "string"
+					},
+					"email": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"experience": {
+						"type": "integer"
+					},
+					"lvl": {
+						"type": "integer"
+					},
+					"createdAt": {
+						"type": "string",
+						"format": "date"
+					},
+					"updatedAt": {
+						"type": "string",
+						"format": "date"
+					}
+				}
+			},
+			"Create_Player_Body": {
+				"required": ["username", "email", "password"],
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string",
+						"example": "ironman"
+					},
+					"email": {
+						"type": "string",
+						"example": "ironman@email.com"
+					},
+					"password": {
+						"type": "string",
+						"minLength": 6,
+						"example": "strong"
+					},
+					"experience": {
+						"type": "integer",
+						"example": 5000
+					}
+				}
+			},
+			"Update_Player_Body": {
+				"type": "object",
+				"properties": {
+					"username": {
+						"type": "string",
+						"example": "theundertaker"
+					},
+					"email": {
+						"type": "string",
+						"example": "undertaker@email.com"
+					},
+					"password": {
+						"type": "string"
+					}
+				}
+			},
+			"Update_Exp_Body": {
+				"required": ["exp"],
+				"type": "object",
+				"properties": {
+					"exp": {
+						"type": "string",
+						"example": "35000"
+					}
+				}
+			},
+			"NotFound_Error": {
+				"type": "object",
+				"properties": {
+					"result": {
+						"type": "string",
+						"example": "Not found"
+					},
+					"message": {
+						"type": "string",
+						"example": "Player with 100 not found"
+					}
+				}
+			},
+			"Server_Error": {
+				"type": "object",
+				"properties": {
+					"message": {
+						"type": "string",
+						"example": "Internal server error"
+					}
+				}
+			}
+		}
+	}
+}
