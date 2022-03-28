@@ -92,6 +92,12 @@
 										}
 									},
 									"exampleThree": {
+										"summary": "there's already player with that username/email",
+										"value": {
+											"message": "Username/Email already taken"
+										}
+									},
+									"exampleFour": {
 										"summary": "password characters over the limit",
 										"value": {
 											"result": "Failed",
