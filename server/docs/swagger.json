@@ -98,7 +98,7 @@
 										}
 									},
 									"exampleFour": {
-										"summary": "password characters over the limit",
+										"summary": "password characters less than 6 characters",
 										"value": {
 											"result": "Failed",
 											"message": "Password minimal 6 character"
@@ -520,9 +520,6 @@
 					"email": {
 						"type": "string",
 						"example": "undertaker@email.com"
-					},
-					"password": {
-						"type": "string"
 					}
 				}
 			},
