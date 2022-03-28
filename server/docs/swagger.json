@@ -234,7 +234,7 @@
 				"summary": "Update an existing player information by id",
 				"operationId": "updatePlayerById",
 				"requestBody": {
-					"description": "Only updating username, email, and password",
+					"description": "Only updating username or email",
 					"content": {
 						"application/x-www-form-urlencoded": {
 							"schema": {
