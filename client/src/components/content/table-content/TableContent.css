@@ -1,0 +1,49 @@
+@media (max-width: 500.98px) {
+	.react-bootstrap-table-pagination-list {
+		margin-top: 2rem;
+	}
+}
+
+h1.table-title {
+	color: #1eaecd;
+}
+
+.react-bootstrap-table-pagination {
+	width: 100%;
+	margin: 0;
+}
+
+.react-bootstrap-table table {
+	text-align: center;
+	border-top-color: #d2606c;
+}
+
+.table > :not(:first-child) {
+	border-top: 0;
+	border-color: #1eaecd;
+}
+
+.react-bootstrap-table th {
+	background-color: #d2606c;
+	border-color: #d2606c;
+	color: #e3f7fc;
+}
+
+.react-bootstrap-table td {
+	background-color: #f7feff;
+	color: #43494a;
+}
+
+li.active a.page-link {
+	background-color: #d2606c !important;
+	border-color: #d2606c !important;
+	color: #e3f7fc !important;
+}
+
+a.page-link {
+	color: #1eaecd;
+}
+
+a.page-link:focus {
+	box-shadow: 0 0 0 0.25rem rgb(97, 218, 251);
+}
