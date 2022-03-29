@@ -28,7 +28,6 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 			setUsername("");
 			setEmail("");
 			setExperience("");
-			this.handleClose();
 		}
 	};
 
@@ -47,7 +46,7 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									placeholder="Username"
 									autoFocus
 									required
-									value={username}
+									value={username.trim()}
 									onChange={(e) => {
 										setUsername(e.target.value);
 									}}
@@ -60,7 +59,7 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									type="email"
 									placeholder="Email"
 									required
-									value={email}
+									value={email.trim()}
 									onChange={(e) => {
 										setEmail(e.target.value);
 									}}
