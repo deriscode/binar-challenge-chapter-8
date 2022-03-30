@@ -32,6 +32,7 @@ h1.table-title {
 .react-bootstrap-table td {
 	background-color: #f7feff;
 	color: #43494a;
+	vertical-align: middle;
 }
 
 li.active a.page-link {

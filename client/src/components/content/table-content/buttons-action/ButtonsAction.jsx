@@ -4,7 +4,7 @@ import { Button, Container } from "react-bootstrap";
 function ButtonsAction({ handleShow }) {
 	return (
 		<div>
-			<Container className="d-flex justify-content-center">
+			<Container className="d-flex justify-content-center my-4">
 				<Button variant="primary" onClick={handleShow}>
 					Add New Player
 				</Button>

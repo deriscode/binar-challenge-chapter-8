@@ -1,47 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { Button, Modal, Form, FloatingLabel } from "react-bootstrap";
 
-function AddPlayer({ show, handleClose, players, setPlayers }) {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [experience, setExperience] = useState("");
-
-	const addNewPlayer = (username, email, experience) => {
-		// pengecekan jika data player kosong, id player baru adalah 1
-		// jika ada data player, id player terakhir ditambah 1 untuk membuat id-nya player baru
-		const id = players.length === 0 ? 1 : players[players.length - 1].id + 1;
-		const newPlayer = {
-			id,
-			username,
-			email,
-			experience: Number(experience) ? Number(experience) : 0,
-			lvl: Number(experience) ? Math.floor(Number(experience) / 1000) : 0,
-		};
-
-		const listPlayers = [...players, newPlayer];
-		setPlayers(listPlayers);
-		localStorage.setItem("playersData", JSON.stringify(listPlayers));
-	};
-
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		if (username && email) {
-			addNewPlayer(username, email, experience);
-			setUsername("");
-			setEmail("");
-			setExperience("");
-			handleClose();
-		}
-	};
-
+function EditPlayer({ show, handleClose, username, email, experience, setUsername, setEmail, setExperience, editPlayer }) {
 	return (
 		<div>
 			<Modal show={show} onHide={handleClose} centered>
 				<Modal.Header closeButton>
-					<Modal.Title>Add New Player</Modal.Title>
+					<Modal.Title>Edit Player</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form onSubmit={handleSubmit}>
+					<Form>
 						<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 							<FloatingLabel controlId="floatingInput" label="Username">
 								<Form.Control
@@ -49,7 +17,7 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									placeholder="Username"
 									autoFocus
 									required
-									value={username.trim()}
+									value={username}
 									onChange={(e) => {
 										setUsername(e.target.value);
 									}}
@@ -62,7 +30,7 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									type="email"
 									placeholder="Email"
 									required
-									value={email.trim()}
+									value={email}
 									onChange={(e) => {
 										setEmail(e.target.value);
 									}}
@@ -77,13 +45,13 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									value={experience}
 									onChange={(e) => {
 										console.log(Number(e.target.value));
-										setExperience(e.target.value);
+										setExperience(Number(e.target.value));
 									}}
 								/>
 							</FloatingLabel>
 						</Form.Group>
-						<Button variant="primary" type="submit" className="my-3">
-							Add Player
+						<Button variant="primary" onClick={editPlayer} className="my-3">
+							Save Changes
 						</Button>
 						<Button variant="secondary" onClick={handleClose} className="mx-4 my-3">
 							Close
@@ -95,4 +63,4 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 	);
 }
 
-export default AddPlayer;
+export default EditPlayer;
