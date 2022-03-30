@@ -1,15 +1,14 @@
 import React from "react";
-import { Button, Modal, Form, FloatingLabel } from "react-bootstrap";
 
-function EditPlayer({ show, handleClose, username, email, experience, setUsername, setEmail, setExperience, editPlayer }) {
+function SearchPlayer() {
 	return (
 		<div>
 			<Modal show={show} onHide={handleClose} centered>
 				<Modal.Header closeButton>
-					<Modal.Title>Edit Player</Modal.Title>
+					<Modal.Title>Add New Player</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Form>
+					<Form onSubmit={handleSubmit}>
 						<Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
 							<FloatingLabel controlId="floatingInput" label="Username">
 								<Form.Control
@@ -17,7 +16,7 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 									placeholder="Username"
 									autoFocus
 									required
-									value={username}
+									value={username.trim()}
 									onChange={(e) => {
 										setUsername(e.target.value);
 									}}
@@ -30,7 +29,7 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 									type="email"
 									placeholder="Email"
 									required
-									value={email}
+									value={email.trim()}
 									onChange={(e) => {
 										setEmail(e.target.value);
 									}}
@@ -42,15 +41,16 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 								<Form.Control
 									type="number"
 									placeholder="Experience"
+									value={experience}
 									onChange={(e) => {
 										console.log(Number(e.target.value));
-										setExperience(Number(e.target.value));
+										setExperience(e.target.value);
 									}}
 								/>
 							</FloatingLabel>
 						</Form.Group>
-						<Button variant="primary" onClick={editPlayer} className="my-3">
-							Save Changes
+						<Button variant="primary" type="submit" className="my-3">
+							Add Player
 						</Button>
 						<Button variant="secondary" onClick={handleClose} className="mx-4 my-3">
 							Close
@@ -62,4 +62,4 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 	);
 }
 
-export default EditPlayer;
+export default SearchPlayer;
