@@ -9,7 +9,7 @@ import { Button, OverlayTrigger, Tooltip } from "react-bootstrap";
 import EditPlayer from "./edit-player/EditPlayer";
 import DeletePlayer from "./delete-player/DeletePlayer";
 
-function TableContent({ players, handleShow, setPlayers }) {
+function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearchModal }) {
 	const [currentId, setCurrentId] = useState("");
 	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
@@ -130,7 +130,7 @@ function TableContent({ players, handleShow, setPlayers }) {
 	return (
 		<div>
 			<h1 className="text-center my-4 table-title">Player List</h1>
-			<ButtonsAction handleShow={handleShow} />
+			<ButtonsAction handleShowAddModal={handleShowAddModal} handleShowSearchModal={handleShowSearchModal} />
 			<BootstrapTable keyField="id" data={players} columns={columns} pagination={paginationFactory(options)} />
 			<EditPlayer
 				show={showEditModal}

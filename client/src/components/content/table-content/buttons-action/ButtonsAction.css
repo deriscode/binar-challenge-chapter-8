@@ -1,0 +1,20 @@
+.btn-add {
+	background-color: #1eaecd;
+	color: #f7feff;
+}
+.btn-add:hover {
+	background-color: #15869e;
+	color: #f7feff;
+}
+
+.btn-search {
+	background-color: #d2606c;
+	color: #f7feff;
+}
+
+.btn-search:hover {
+	background-color: #94464e;
+	color: #f7feff;
+}
+
+/* #1eaecd */

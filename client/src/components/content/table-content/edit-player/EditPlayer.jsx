@@ -17,7 +17,7 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 									placeholder="Username"
 									autoFocus
 									required
-									value={username}
+									value={username.trim()}
 									onChange={(e) => {
 										setUsername(e.target.value);
 									}}
@@ -30,7 +30,7 @@ function EditPlayer({ show, handleClose, username, email, experience, setUsernam
 									type="email"
 									placeholder="Email"
 									required
-									value={email}
+									value={email.trim()}
 									onChange={(e) => {
 										setEmail(e.target.value);
 									}}

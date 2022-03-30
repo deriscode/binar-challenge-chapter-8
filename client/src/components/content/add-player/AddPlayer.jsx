@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal, Form, FloatingLabel } from "react-bootstrap";
+import { Button, Modal, Form, FloatingLabel, Container } from "react-bootstrap";
 
 function AddPlayer({ show, handleClose, players, setPlayers }) {
 	const [username, setUsername] = useState("");
@@ -12,8 +12,8 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 		const id = players.length === 0 ? 1 : players[players.length - 1].id + 1;
 		const newPlayer = {
 			id,
-			username,
-			email,
+			username: username.toLowerCase(),
+			email: email.toLowerCase(),
 			experience: Number(experience) ? Number(experience) : 0,
 			lvl: Number(experience) ? Math.floor(Number(experience) / 1000) : 0,
 		};
@@ -77,17 +77,19 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 									value={experience}
 									onChange={(e) => {
 										console.log(Number(e.target.value));
-										setExperience(e.target.value);
+										setExperience(Number(e.target.value));
 									}}
 								/>
 							</FloatingLabel>
 						</Form.Group>
-						<Button variant="primary" type="submit" className="my-3">
-							Add Player
-						</Button>
-						<Button variant="secondary" onClick={handleClose} className="mx-4 my-3">
-							Close
-						</Button>
+						<Container className="d-flex justify-content-center">
+							<Button variant="primary" type="submit" className="my-3">
+								Add Player
+							</Button>
+							<Button variant="secondary" onClick={handleClose} className="mx-4 my-3">
+								Close
+							</Button>
+						</Container>
 					</Form>
 				</Modal.Body>
 			</Modal>
