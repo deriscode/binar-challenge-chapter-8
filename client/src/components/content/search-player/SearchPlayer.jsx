@@ -2,6 +2,11 @@ import React from "react";
 import { Button, Container, FloatingLabel, Form, Modal, Row, Col } from "react-bootstrap";
 
 function SearchPlayer({ show, handleClose, setFilter, filter }) {
+	const clearSearch = () => {
+		setFilter("");
+		handleClose();
+	};
+
 	return (
 		<div>
 			<Modal show={show} onHide={handleClose}>
@@ -16,6 +21,7 @@ function SearchPlayer({ show, handleClose, setFilter, filter }) {
 									type="text"
 									placeholder="Search by username"
 									autoFocus
+									value={filter.username}
 									onChange={(e) => {
 										setFilter({ ...filter, username: e.target.value.toLowerCase() });
 									}}
@@ -27,6 +33,7 @@ function SearchPlayer({ show, handleClose, setFilter, filter }) {
 								<Form.Control
 									type="email"
 									placeholder="Search by email"
+									value={filter.email}
 									onChange={(e) => {
 										setFilter({ ...filter, email: e.target.value.toLowerCase() });
 									}}
@@ -39,6 +46,7 @@ function SearchPlayer({ show, handleClose, setFilter, filter }) {
 									<Form.Control
 										type="number"
 										placeholder="Search by experience"
+										value={filter.experience}
 										onChange={(e) => {
 											setFilter({ ...filter, experience: e.target.value });
 										}}
@@ -50,6 +58,7 @@ function SearchPlayer({ show, handleClose, setFilter, filter }) {
 									<Form.Control
 										type="number"
 										placeholder="Search by lvl"
+										value={filter.lvl}
 										onChange={(e) => {
 											setFilter({ ...filter, lvl: e.target.value });
 										}}
@@ -57,8 +66,11 @@ function SearchPlayer({ show, handleClose, setFilter, filter }) {
 								</FloatingLabel>
 							</Form.Group>
 						</Row>
-						<Container className="d-flex justify-content-center">
-							<Button variant="secondary" onClick={handleClose}>
+						<Container className="d-flex justify-content-evenly">
+							<Button variant="warning" onClick={clearSearch} className="my-3">
+								Clear Field
+							</Button>
+							<Button variant="secondary" onClick={handleClose} className="my-3">
 								Close
 							</Button>
 						</Container>

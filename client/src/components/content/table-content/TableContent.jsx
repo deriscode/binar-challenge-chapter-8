@@ -30,7 +30,9 @@ function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearc
 		const index = playerList.findIndex((item) => item.id === currentId);
 		playerList[index].username = username ? username : playerList[index].username;
 		playerList[index].email = email ? email : playerList[index].email;
-		playerList[index].experience = experience ? playerList[index].experience + Number(experience) : playerList[index].experience;
+		playerList[index].experience = experience
+			? playerList[index].experience + Number(experience)
+			: playerList[index].experience;
 		playerList[index].lvl = Math.floor(playerList[index].experience / 1000);
 		setPlayers(playerList);
 		setExperience("");
@@ -82,7 +84,11 @@ function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearc
 			formatter: (cell, row) => {
 				return (
 					<div>
-						<OverlayTrigger placement="left" delay={{ show: 150, hide: 300 }} overlay={<Tooltip>Edit Player</Tooltip>}>
+						<OverlayTrigger
+							placement="left"
+							delay={{ show: 150, hide: 300 }}
+							overlay={<Tooltip>Edit Player</Tooltip>}
+						>
 							<Button
 								variant="none"
 								onClick={() => {
@@ -93,7 +99,11 @@ function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearc
 							</Button>
 						</OverlayTrigger>
 
-						<OverlayTrigger placement="right" delay={{ show: 150, hide: 300 }} overlay={<Tooltip>Delete Player</Tooltip>}>
+						<OverlayTrigger
+							placement="right"
+							delay={{ show: 150, hide: 300 }}
+							overlay={<Tooltip>Delete Player</Tooltip>}
+						>
 							<Button
 								variant="none"
 								onClick={() => {
@@ -120,18 +130,22 @@ function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearc
 				text: "10",
 				value: 10,
 			},
-			{
-				text: "15",
-				value: 15,
-			},
 		],
 	};
 
 	return (
 		<div>
 			<h1 className="text-center my-4 table-title">Player List</h1>
-			<ButtonsAction handleShowAddModal={handleShowAddModal} handleShowSearchModal={handleShowSearchModal} />
-			<BootstrapTable keyField="id" data={players} columns={columns} pagination={paginationFactory(options)} />
+			<ButtonsAction
+				handleShowAddModal={handleShowAddModal}
+				handleShowSearchModal={handleShowSearchModal}
+			/>
+			<BootstrapTable
+				keyField="id"
+				data={players}
+				columns={columns}
+				pagination={paginationFactory(options)}
+			/>
 			<EditPlayer
 				show={showEditModal}
 				handleClose={handleCloseEditModal}
@@ -143,7 +157,12 @@ function TableContent({ players, handleShowAddModal, setPlayers, handleShowSearc
 				setExperience={setExperience}
 				editPlayer={editPlayer}
 			/>
-			<DeletePlayer show={showDeleteModal} handleClose={handleCloseDeleteModal} deletePlayer={deletePlayer} username={username} />
+			<DeletePlayer
+				show={showDeleteModal}
+				handleClose={handleCloseDeleteModal}
+				deletePlayer={deletePlayer}
+				username={username}
+			/>
 		</div>
 	);
 }

@@ -6,7 +6,7 @@ function Footer() {
 
 	return (
 		<div>
-			<Navbar className="navbar-bg" expand="lg">
+			<Navbar className="navbar-bg footer" expand="lg">
 				<Container className="justify-content-center py-3">
 					<small className="footer-text">
 						deriscode<span>&copy;</span>

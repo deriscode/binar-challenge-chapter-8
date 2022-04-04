@@ -74,7 +74,6 @@ function AddPlayer({ show, handleClose, players, setPlayers }) {
 								<Form.Control
 									type="number"
 									placeholder="Experience"
-									value={experience}
 									onChange={(e) => {
 										console.log(Number(e.target.value));
 										setExperience(Number(e.target.value));
